@@ -181,14 +181,13 @@ var rememberall = forgetter("name");
 var frodo = function(startingHungerValue, startingDangerValue){
   return {
     dinnerOverFire: function(){
-      startingHungerValue=startingHungerValue<=25?0:startingHungerValue-25;
-      startingDangerValue=startingDangerValue>=60?100:startingDangerValue+40;
-      return {hunger:startingHungerValue, danger: startingDangerValue}
+      return {hunger: startingHungerValue=startingHungerValue<=25?0:startingHungerValue-25,
+              danger: startingDangerValue=startingDangerValue>=60?100:startingDangerValue+40}
     },
     hidingInBush: function(){
-      startingHungerValue=startingHungerValue>=65?100:startingHungerValue+35;
-      startingDangerValue=startingDangerValue<=20?0:startingDangerValue-20;
-      return {hunger:startingHungerValue, danger:startingDangerValue}
+      return {hunger: startingHungerValue=startingHungerValue>=65?100:startingHungerValue+35,
+              danger: startingDangerValue=startingDangerValue<=20?0:startingDangerValue-20}
+      //return {hunger:startingHungerValue, danger:startingDangerValue}
     }
   }
 }
