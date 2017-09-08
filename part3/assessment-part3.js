@@ -54,12 +54,21 @@ var foo;
 // CODE HERE...
 
 function promiseMe($q) {
-  return $q(function(response) {
-    setTimeout(function() {
+  // return $q(function(response) {
+  //   setTimeout(function() {
+  //     // foo = 'bar';
+  //
+  //     response('bar');
+  //   }, 20);
+  // }).then(res=>{
+  //   console.log(res);
+  // })
+  return new Promise(function(res){
+    setTimeout(function(){
       foo = 'bar';
-      response('bar');
-    }, 20);
-  });
+      res(foo);
+    },20)
+  })
 }
 
 // *************
@@ -76,6 +85,15 @@ function promiseMe($q) {
 
 // CODE HERE...
 
-//var emailList = function($q, $http){
 
-//}
+var emailList = function($q, $http){
+  var a = [];
+  return new Promise(function(res){
+    $http.get('/api/users').then(function(r){
+      a = r.data.map(x=>{return x.email});
+      res(a);
+    })
+  })
+}
+
+//$http.get('/api/users').then(function(res){console.log(res);})
