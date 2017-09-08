@@ -44,6 +44,13 @@ function noWeakLink() {
     url: '/api/users'
   })
   // CODE HERE...
+  .then(function(res){
+    firstUser=res.data[0];
+    return res;
+  }).then(function(res){
+    thirdUser=res.data[2];
+    return res.data[9];
+  })
 
 }
 
@@ -75,6 +82,7 @@ function large() {
 }
 // CODE HERE...
 
+var boundToElephant = large.bind(elephant);
 
 
 // *************
@@ -88,7 +96,9 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
-
+var deathStar = function(capacity, crew){
+  return capacity.bind(crew);
+};
 
 
 // *************
@@ -103,7 +113,11 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
-
+var accountingOffice = function(assets){
+  return function(liabilities){
+    return assets+liabilities;
+  }
+}
 
 
 // *************
@@ -128,8 +142,15 @@ function large() {
 // };
 
 // CODE HERE...
+var forgetter = function(n){
+  var a = [];
+  return function(item){
+    a.push(item);
+    return {name:n, remember:a}
+  }
+}
 
-
+var rememberall = forgetter("name");
 
 // *************
 // * PROBLEM 6 *
@@ -156,3 +177,18 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+var frodo = function(startingHungerValue, startingDangerValue){
+  return {
+    dinnerOverFire: function(){
+      startingHungerValue=startingHungerValue<=25?0:startingHungerValue-25;
+      startingDangerValue=startingDangerValue>=60?100:startingDangerValue+40;
+      return {hunger:startingHungerValue, danger: startingDangerValue}
+    },
+    hidingInBush: function(){
+      startingHungerValue=startingHungerValue>=65?100:startingHungerValue+35;
+      startingDangerValue=startingDangerValue<=20?0:startingDangerValue-20;
+      return {hunger:startingHungerValue, danger:startingDangerValue}
+    }
+  }
+}
